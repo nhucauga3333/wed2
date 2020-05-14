@@ -3,19 +3,34 @@
     <head>
         <link rel="stylesheet" type="text/css" href="style_cart.css">
         <title>Thế giới di động</title>
+
+
+
     </head>
+
+
+
     <body>
+
+
+    <style>
+    .tablegiohang{
+
+        table-layout: fixed;
+        word-wrap: break-word;
+    }
+</style>
         <div class="main">
 
             <div class="header">
                 <div class="logo" style="float: left;">
-                    <a href="index.html"> <img src="image/logo_thegioididong.png" alt="logothegioididong"  width="196px"></a>
+                    <a href="index.php"> <img src="image/logo_thegioididong.png" alt="logothegioididong"  width="196px"></a>
                 </div>
                 <div class="searchBar" >
                     <div class="topnav" style="padding-top:14px;padding-bottom:18px">                           
-                        <a class="active" href="index.html">Trang chủ</a>
-                        <a href="introduce.html"> Giới thiệu</a>
-                        <a href="cart.html">Giỏ Hàng</a>
+                        <a class="active" href="index.php">Trang chủ</a>
+                        <a href="introduce.php"> Giới thiệu</a>
+                        <a href="cart.php">Giỏ Hàng</a>
                         <a href="#" onclick='alert("đang gọi vui lòng chờ để được tư vấn")' >Hotline: 1900</a>
                         <input type="text" placeholder="Tìm kiếm..">
                     </div>
@@ -33,6 +48,29 @@
 
                 <div class="clear-both padding-14">
                     <div class="pull-left" style="width: 380px">
+
+
+                        <style>
+                            td[2] {
+                                height: 100px;
+                            }
+                        
+                        </style>
+
+                        <table class="tablegiohang">
+                            <tr>
+                                <td><img width="100" height="102" src="image/iphone/iphone-11-pro-max-512g.jpg"/></td>
+                                <td  > <p style="width: 100%"><b>iPhone 11 Pro Max 512GB</b></p></td>
+                                <td>  <p>43.990.000₫</p></td>
+                                <td>
+                                    <button>-</button><input type="text" value="1" style="width: 50px; text-align: center;" /><button>+</button>
+                                    
+                                    
+                                </td>
+                                <td>  <button>x</button>    </td>
+                            </tr>
+                        </table>
+
                         <div class="pull-left">
                             <img width="100" height="102" src="image/iphone/iphone-11-pro-max-512g.jpg"/>
                         </div>
@@ -131,6 +169,26 @@
             </div>
 
         </div>   
+
+
                 
     </body>
+
+    <script>
+
+
+        //var listsanpham =JSON.parse(localStorage.getItem("giohang")) ;
+       //for(var i = 0; i<listsanpham.length; i++){
+           alert(listsanpham[i].tensp);
+       //}
+        
+        
+
+        
+
+    </script>
+
+
+
+    
 </html>

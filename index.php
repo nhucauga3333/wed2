@@ -13,7 +13,7 @@
     }
 
 
-    $sql = "SELECT * FROM Product ";
+    $sql = "SELECT * FROM SANPHAM ";
 
     $result = mysqli_query($conn, $sql);
 
@@ -25,7 +25,23 @@
             $listProduct[] = $row;
         }
 
-        echo count($listProduct);
+        
+    }
+
+
+    $sql = "SELECT * FROM LOAISP ";
+
+    $result = mysqli_query($conn, $sql);
+
+    $listloaisp = array();
+
+    if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+            $listloaisp[] = $row;
+        }
+
+       
     }
 
 ?>
@@ -47,7 +63,7 @@
                     <div class="topnav" style="padding-top:14px;padding-bottom:18px">                           
                         <a class="active" href="index.html">Trang chủ</a>
                         <a href="introduce.html"> Giới thiệu</a>
-                        <a href="cart.html">Giỏ Hàng</a>
+                        <a href="cart.php">Giỏ Hàng</a>
                         <a href="#" onclick='alert("đang gọi vui lòng chờ để được tư vấn")' >Hotline: 1900</a>
                         <input type="text" placeholder="Tìm kiếm..">
                     </div>
@@ -55,16 +71,13 @@
             </div>
 
             <div class="nav" style="clear: both;">
-                    <ul>
-                            <li><a href="iphone_product.html"title="IPhone" ><img src="image/iPhone-(Apple)42-b_16.jpg"></a></li>
-                            <li><a href="samsung_product.html"title="SamSung"><img src="image/Samsung42-b_25.jpg"></a></li>
-                            <li><a href="oppo_product.html"title="Oppo"><img src="image/OPPO42-b_57.jpg"></a></li>
-                            <li><a href="xiaomi_product.html"title="Xiaomi"><img src="image/Xiaomi42-b_31.png"></a></li>
-                            <li><a href="vivo_product.html"title="Vivo"><img src="image/Vivo42-b_50.jpg"></a></li>
-                            <li><a href="huawei_product.html"title="Huawei"><img src="image/Huawei42-b_30.jpg"></a></li>
-                            <li><a href="realme_product.html"title="realme"><img src="image/Realme42-b_37.png"></a></li>
-            
-                    </ul>
+                <ul>                           
+                <?php
+                    for ($i = 0; $i < count($listloaisp); $i++) {                       
+                        echo '<li><a href="product.php?MALOAI='. $listloaisp[$i]['MALOAI'] .'"title="IPhone" ><img src="'. $listloaisp[$i]['ImgPath'] .'"></a></li>';                  
+                    }                   
+                ?> 
+                </ul>
             </div>
    
             <div class="content" style="clear: both;">
@@ -91,16 +104,23 @@
                 <?php
                     for ($i = 0; $i < count($listProduct); $i++) {
                        
+
                         echo "<div class='product'>";
                         echo        "<div class='pImage'>";
-                        echo        "    <a href='iphonedetail/iphone7plus.html' ><img src='image/iphone/iphone-7-plus-32gb.jpg'/></a>";
+                        echo        '    <a href="ctsanpham.php?ID='.$listProduct[$i]['ID'].'" ><img src="image/iphone/iphone-7-plus-32gb.jpg"/></a>';
                         echo        "</div>";
                         echo        "<div class='pInfo'>";
-                        echo            "<p><strong>" . $listProduct[$i]['Name'] ."</strong></p>";
-                        echo            "<h3 class='amount'>" . $listProduct[$i]['Price'] ."₫</h3>";
-                        echo            "<span>" . $listProduct[$i]['Description'] . "</span><br>";
+                        echo            "<p><strong>" . $listProduct[$i]['TENSP'] ."</strong></p>";
+                        echo            "<h3 class='amount'>" . $listProduct[$i]['GIA'] ."₫</h3>";
+                        echo            "<span>" . $listProduct[$i]['ID'] . "</span><br>";
                         echo        "</div>";
                         echo"</div>";
+
+
+
+
+
+                        
                     }
 
                    

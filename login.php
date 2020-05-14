@@ -67,7 +67,7 @@
         
         <div class ="main">
             <div class="header">
-                <h1>Log in</h1>
+                <h1>Log in 123</h1>
             </div>
             <div class="mid">
                 <form action="checklogin.php" method="post">
