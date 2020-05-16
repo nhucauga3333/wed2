@@ -55,6 +55,8 @@ $product = $listProduct[0];
         <link rel="stylesheet" type="text/css" href="style_detail.css">
         <link rel="stylesheet" type="text/css" href="style.css">
         <title>Thế giới di động</title>
+
+
         <script>
         function openDetail()
         {
@@ -68,36 +70,43 @@ $product = $listProduct[0];
             obj.setAttribute("style","display:none");
         }
 
-
         function themsanpham(){
-            var listsanpham = [];
-            
-        
-            var tensp = document.getElementById("tensp").innerHTML;
 
             
-            var hinhanh = document.getElementById("hinhanh").getAttribute("src");;
+            var listsanpham = [];
+            var giohang =  localStorage.getItem("giohang");
+            
+
+            if(giohang.length>0){
+                listsanpham = JSON.parse(giohang);
+            }
+
+            var hinhanh = document.getElementById("hinhanh").getAttribute("src");
+            var tensp = document.getElementById("tensp").innerHTML;
             var gia = document.getElementById("gia").innerHTML;
             var soluong = 1;
+            var sanpham = {hinhanh:hinhanh ,tensp:tensp ,gia:gia ,soluong:soluong};
+            var v = -1;
+            for(var i = 0 ; i<listsanpham.length;i++){
+                if(listsanpham[i].tensp == sanpham.tensp ){
+                    v = i;                   
+                }
+            }
 
-
-            var sanpham = {hinhanh: hinhanh, tensp: tensp, gia: gia, soluong: soluong};
-        
-            listsanpham.push(sanpham);
-
-
-            localStorage.setItem("giohang", JSON.stringify(listsanpham));
-
+            if(v == -1){
+                listsanpham.push(sanpham);
+            }else{
+                listsanpham[v].soluong = listsanpham[v].soluong + 1;
+            }
+            
+            localStorage.setItem("giohang",JSON.stringify(listsanpham));
             window.location.href = "cart.php";
 
-            
-
-
-
-
-            
-
         }
+
+
+
+        
         </script>
         
     </head>
@@ -110,7 +119,7 @@ $product = $listProduct[0];
                 </div>
                 <div class="searchBar" >
                     <div class="topnav" style="padding-top:14px;padding-bottom:18px">                           
-                        <a class="active" href="index.html">Trang chủ</a>
+                        <a class="active" href="index.php">Trang chủ</a>
                         <a href="introduce.html">Giới thiệu</a>
                         <a href="cart.html">Giỏ Hàng</a>
                         <a href="#" onclick='alert("đang gọi vui lòng chờ để được tư vấn")' >Hotline: 1900</a>          

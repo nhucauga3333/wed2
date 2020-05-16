@@ -47,75 +47,18 @@
                </div>
 
                 <div class="clear-both padding-14">
-                    <div class="pull-left" style="width: 380px">
+
+                       
+
+                        <table style="width:100%" class="tablegiohang" id="tablegiohang">
+                        </table>    
 
 
-                        <style>
-                            td[2] {
-                                height: 100px;
-                            }
-                        
-                        </style>
-
-                        <table class="tablegiohang">
-                            <tr>
-                                <td><img width="100" height="102" src="image/iphone/iphone-11-pro-max-512g.jpg"/></td>
-                                <td  > <p style="width: 100%"><b>iPhone 11 Pro Max 512GB</b></p></td>
-                                <td>  <p>43.990.000₫</p></td>
-                                <td>
-                                    <button>-</button><input type="text" value="1" style="width: 50px; text-align: center;" /><button>+</button>
-                                    
-                                    
-                                </td>
-                                <td>  <button>x</button>    </td>
-                            </tr>
-                        </table>
-
-                        <div class="pull-left">
-                            <img width="100" height="102" src="image/iphone/iphone-11-pro-max-512g.jpg"/>
-                        </div>
-                        <div class="pull-left">
-                            <p><b>iPhone 11 Pro Max 512GB</b></p>
-                        </div>                        
-                    </div>
-                    <div class="pull-left" style="margin-left: 20px; width: 120px">
-                            <p>43.990.000₫</p>
-                    </div>
-                    <div class="pull-left" style="margin-left: 54px; margin-top: 17px;">
-                        <button>-</button>
-                        <input type="text" value="1" style="width: 50px; text-align: center;" />
-                        <button>+</button>
-                    </div>
-                    <div class="pull-left" style="margin-left: 20px; margin-top: 17px;">
-                            <button>x</button>                            
-                        </div>
+                  
                 </div>
 
-                <div class="clear-both padding-14">
-                        <hr/>
-                   </div>
-
-                   <div class="clear-both padding-14">
-                        <div class="pull-left" style="width: 380px">
-                            <div class="pull-left">
-                                <img width="100" height="102" src="image/samsung/note10+.jpg"/>
-                            </div>
-                            <div class="pull-left">
-                                <p><b>Samsung Galaxy Note 10+</b></p>
-                            </div>                        
-                        </div>
-                        <div class="pull-left" style="margin-left: 20px; width: 120px">
-                                <p>24.990.000₫</p>
-                        </div>
-                        <div class="pull-left" style="margin-left: 54px; margin-top: 17px;">
-                            <button>-</button>
-                            <input type="text" value="1" style="width: 50px; text-align: center;" />
-                            <button>+</button>
-                        </div>
-                        <div class="pull-left" style="margin-left: 20px; margin-top: 17px;">
-                                <button>x</button>                            
-                            </div>
-                    </div>
+               
+                  
 
                     <div class="clear-both pull-right">
                         <p style="font-size: large; margin-right: 20px; "><strong>Tổng tiền: <span style="color:red">68.980.000 đ</span> </strong></p>
@@ -153,6 +96,8 @@
                     
             </div>
 
+
+
             <div class="myfooter">
                     
                 <center style="padding-top: 60px;">
@@ -169,22 +114,60 @@
             </div>
 
         </div>   
-
+    
 
                 
     </body>
 
     <script>
 
+        var giohang =  localStorage.getItem("giohang");
+        var listsanpham = [];
 
-        //var listsanpham =JSON.parse(localStorage.getItem("giohang")) ;
-       //for(var i = 0; i<listsanpham.length; i++){
-           alert(listsanpham[i].tensp);
-       //}
-        
-        
+        if(giohang.length>0){
+            listsanpham = JSON.parse(giohang);
+        } 
 
-        
+        var table = document.getElementById("tablegiohang");
+
+
+        for(var i = 0 ; i<listsanpham.length;i++){
+            var row = document.createElement("TR");
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+
+            cell1.setAttribute("width", "110px");
+            cell2.setAttribute("width", "300px");
+
+            cell3.setAttribute("width", "100px");
+            cell3.setAttribute("style", "text-align:center");
+
+            cell4.setAttribute("width", "100px");
+            cell4.setAttribute("style", "text-align:center");
+
+            cell5.setAttribute("style", "text-align:center");
+
+
+            
+            cell1.innerHTML = '<img width="100" height="102" src="'+listsanpham[i].hinhanh+'"/>';
+            cell2.innerHTML = ' <p><b>'+listsanpham[i].tensp+'</b></p>';
+            cell3.innerHTML = ' <p>'+listsanpham[i].gia +' ₫</p>';
+            cell4.innerHTML = '  <input type="text" value="'+listsanpham[i].soluong+'" style="width: 50px; text-align: center;" />';
+            cell5.innerHTML = '<button>x</button> ';
+
+
+            table.appendChild(row);
+        }
+
+      
+
+
+
+       
 
     </script>
 
