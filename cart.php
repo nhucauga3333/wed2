@@ -42,7 +42,10 @@
             <div class="mid" id = "hienthigiohang" style = "display:none" >
                 <div>
                     <p class="pull-left" style="font-size: large;color: #116ab7;" >GIỎ HÀNG CỦA BẠN (<span id = "tongsosanpham">2</span> sản phẩm)</p>
+
                     <a class="pull-right" href="index.php" style="font-size: large; margin-top: 20px; color: #337ab7;">Mua thêm sản phẩm khác</a>                    
+
+
                 </div>
                <div class="clear-both">
                     <hr/>
@@ -200,8 +203,6 @@
 
 
             window.location.href = "cart.php";
-
-            
         }
 
         function giamsoluong(button){

@@ -71,7 +71,7 @@ $product = $listProduct[0];
         }
 
         function themsanpham(){
-
+            
             
             var listsanpham = [];
             var giohang =  localStorage.getItem("giohang");
@@ -225,7 +225,10 @@ $product = $listProduct[0];
                     <div class="price">
                         <?php
 
+
                          echo '<strong id ="gia">'.$product['Gia'].'</strong>đ'
+
+
 
                         ?>
                         
