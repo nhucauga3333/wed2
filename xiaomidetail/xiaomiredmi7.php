@@ -24,13 +24,13 @@
 
             <div class="header">
                 <div class="logo" style="float: left;">
-                    <a href="../index.html"> <img src="../image/logo_thegioididong.png" alt="logothegioididong"  width="196px"></a>
+                    <a href="../index.php"> <img src="../image/logo_thegioididong.png" alt="logothegioididong"  width="196px"></a>
                 </div>
                 <div class="searchBar" >
                     <div class="topnav" style="padding-top:14px;padding-bottom:18px">                           
-                        <a class="active" href="../index.html">Trang chủ</a>
-                        <a href="../introduce.html">Giới thiệu</a>
-                        <a href="cart.html">Giỏ Hàng</a>
+                        <a class="active" href="../index.php">Trang chủ</a>
+                        <a href="../introduce.php">Giới thiệu</a>
+                        <a href="cart.php">Giỏ Hàng</a>
                         <a href="#" onclick='alert("đang gọi vui lòng chờ để được tư vấn")' >Hotline: 1900</a>
                         <input type="text" placeholder="Tìm kiếm..">
                     </div>
