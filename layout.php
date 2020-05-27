@@ -63,7 +63,7 @@
                     <div class="topnav" style="padding-top:14px;padding-bottom:18px">                           
                         <a class="active" href="index.php">Trang chủ</a>
                         <a href="introduce.php"> Giới thiệu</a>
-                        <a href="cart.php">Giỏ Hàng</a>
+                        <a href="giohang.php">Giỏ Hàng</a>
                         <a href="#" onclick='alert("đang gọi vui lòng chờ để được tư vấn")' >Hotline: 1900</a>
                         <input type="text" placeholder="Tìm kiếm..">
                     </div>
@@ -74,7 +74,7 @@
                 <ul>                           
                 <?php
                     for ($i = 0; $i < count($listloaisp); $i++) {                       
-                        echo '<li><a href="product.php?MaLoai='. $listloaisp[$i]['MaLoai'] .'"title="IPhone" ><img src="'. $listloaisp[$i]['ImgPath'] .'"></a></li>';                  
+                        echo '<li><a href="sanpham.php?MaLoai='. $listloaisp[$i]['MaLoai'] .'"title="IPhone" ><img src="'. $listloaisp[$i]['ImgPath'] .'"></a></li>';                  
                     }                   
                 ?> 
                 </ul>

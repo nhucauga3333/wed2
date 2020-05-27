@@ -139,7 +139,7 @@
         localStorage.setItem("giohang", JSON.stringify(listsanpham));
 
 
-        window.location.href = "cart.php";
+        window.location.href = "giohang.php";
     }
 
     function tangsoluong(button) {
@@ -153,7 +153,7 @@
         localStorage.setItem("giohang", JSON.stringify(listsanpham));
 
 
-        window.location.href = "cart.php";
+        window.location.href = "giohang.php";
     }
 
     function giamsoluong(button) {
@@ -174,7 +174,7 @@
         localStorage.setItem("giohang", JSON.stringify(listsanpham));
 
 
-        window.location.href = "cart.php";
+        window.location.href = "giohang.php";
 
 
     }

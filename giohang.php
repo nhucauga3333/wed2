@@ -1,6 +1,6 @@
 <?php
 
- $childView = '_cart.php';
+ $childView = '_giohang.php';
  include('layout.php');
 
 ?>

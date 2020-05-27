@@ -67,7 +67,7 @@ $product = $listProduct[0];
         }
 
         localStorage.setItem("giohang", JSON.stringify(listsanpham));
-        window.location.href = "cart.php";
+        window.location.href = "giohang.php";
 
     }
 </script>
