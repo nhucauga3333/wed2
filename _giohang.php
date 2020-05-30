@@ -1,3 +1,70 @@
+<?php
+
+use FFI\ParserException;
+
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+
+    $Giohang = json_decode($_REQUEST["Giohang"], false);
+
+
+    $tongtien = 0;
+    for ($i = 0; $i < count($Giohang); $i++) {
+        $tongtien = $tongtien + ($Giohang[$i]->gia * $Giohang[$i]->soluong);
+    }
+
+    //thêm dữ liệu vào hóa đơn
+    $sql =  $conn->prepare("INSERT INTO HOADON (SoHD,NgLap,TenKH,SdtKH,DiaChiGiaoHang,TongTien) VALUES (?,?,?,?,?,?)");
+    $sql->bind_param("sssssi", $SoHD, $NgLap, $TenKH, $SdtKH, $DiaChiGiaoHang, $TongTien);
+    $SoHD = "HĐ" . randomNumber(7);
+    $NgLap =  date('Y-m-d H:i:s');
+    $TenKH = $_REQUEST['TenKH'];
+    $SdtKH = $_REQUEST['SdtKH'];
+    $DiaChiGiaoHang = $_REQUEST['DiaChiGiaoHang'];
+    $TongTien = $tongtien;
+
+    $sql->execute();
+
+    $last_id = mysqli_insert_id($conn);
+
+    for ($i = 0; $i < count($Giohang); $i++) {
+        //thêm dữ liệu vào chi tiết hóa đơn
+        $sql =  $conn->prepare("INSERT INTO CTHOADON (IDHoaDon,TenSP,SoLuong,DonGia,ThanhTien) VALUES (?,?,?,?,?)");
+        $sql->bind_param("isiii", $IDHoaDon, $TenSP, $SoLuong, $DonGia, $ThanhTien);
+        $IDHoaDon = $last_id;
+        $TenSP = $Giohang[$i]->tensp;
+        $SoLuong = $Giohang[$i]->soluong;
+        $DonGia = $Giohang[$i]->gia;
+        $ThanhTien = $Giohang[$i]->gia * $Giohang[$i]->soluong;
+        $sql->execute();
+    }
+    $sql->close();
+    $conn->close();
+
+    $_SESSION["dathang"]  = "thanhcong";
+
+    header('Location: dathangthanhcong.php');
+}
+
+
+function randomNumber($length)
+{
+    $result = '';
+
+    for ($i = 0; $i < $length; $i++) {
+        $result .= mt_rand(0, 9);
+    }
+
+    return $result;
+}
+?>
+
+
+
+
 <link rel="stylesheet" type="text/css" href="style_cart.css">
 
 
@@ -9,89 +76,78 @@
         word-wrap: break-word;
     }
 </style>
+<div>
+    <p style="visibility: hidden;">fsdfsfs</p>
+    <center id="hienthigiohangrong" style="display:none">
+        <p>GIỎ HÀNG CỦA BẠN CHƯA CÓ SẢN PHẨM NÀO</p>
+    </center>
 
-<center id="hienthigiohangrong" style="display:none">
-    <p>GIỎ HÀNG CỦA BẠN CHƯA CÓ SẢN PHẨM NÀO</p>
-</center>
-
-<div class="mid" id="hienthigiohang" style="display:none">
-    <div>
-        <p class="pull-left" style="font-size: large;color: #116ab7;">GIỎ HÀNG CỦA BẠN (<span id="tongsosanpham">2</span> sản phẩm)</p>
-
-        <a class="pull-right" href="index.php" style="font-size: large; margin-top: 20px; color: #337ab7;">Mua thêm sản phẩm khác</a>
-
-
-    </div>
-    <div class="clear-both">
-        <hr />
-    </div>
-
-    <div class="clear-both padding-14">
-
-
-
-        <table style="width:100%" class="tablegiohang" id="tablegiohang">
-        </table>
-
-
-
-    </div>
-
-
-
-
-    <div class="clear-both pull-right">
-        <p style="font-size: large; margin-right: 20px; "><strong>Tổng tiền: <span style="color:red" id="tongtien">68.980.000 đ</span> </strong></p>
-
-    </div>
-
-    <div class="clear-both" style="padding-top: 20px;">
-        <p style="font-size: large; color: #d0021b;">THÔNG TIN KHÁCH HÀNG</p>
-
-
-        <form class="form-inline" action="#">
-            <table>
-                <tr>
-                    <td><label>Họ và tên: *</label></td>
-                    <td><input type="text" placeholder="nhập họ và tên" name="customerName"></td>
-                </tr>
-                <tr>
-                    <td><label>Số điện thoại: *</label></td>
-                    <td><input type="text" placeholder="nhập số điện thoại" name="customerPhone"><br /></td>
-                </tr>
-                <tr>
-                    <td><label>Email:</label></td>
-                    <td><input type="text" placeholder="nhập email" name="customerEmail"><br /></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="pull-right">
-                        <button type="submit" onclick='alert("mua hàng thành công")' style="color:black"><strong>Đặt hàng luôn</strong></button>
-                    </td>
-                </tr>
+    <div class="mid" id="hienthigiohang" style="display:none">
+        <div>
+            <p class="pull-left" style="font-size: large;color: #116ab7;">GIỎ HÀNG CỦA BẠN (<span id="tongsosanpham">2</span> sản phẩm)</p>
+            <a class="pull-right" href="index.php" style="font-size: large; margin-top: 20px; color: #337ab7;">Mua thêm sản phẩm khác</a>
+        </div>
+        <div class="clear-both">
+            <hr />
+        </div>
+        <div class="clear-both padding-14">
+            <table style="width:100%" class="tablegiohang" id="tablegiohang">
             </table>
-        </form>
+        </div>
+
+
+
+
+        <div class="clear-both pull-right">
+            <p style="font-size: large; margin-right: 20px; "><strong>Tổng tiền: <span style="color:red" id="tongtien">68.980.000 đ</span> </strong></p>
+        </div>
+
+        <div class="clear-both" style="padding-top: 20px;">
+            <p style="font-size: large; color: #d0021b;">THÔNG TIN KHÁCH HÀNG</p>
+
+
+            <form class="form-inline" action="giohang.php" method="POST">
+                <table>
+                    <tr>
+                        <td><label>Họ và tên: *</label></td>
+                        <td><input type="text" placeholder="nhập họ và tên" name="TenKH"></td>
+                    </tr>
+                    <tr>
+                        <td><label>Số điện thoại: *</label></td>
+                        <td><input type="text" placeholder="nhập số điện thoại" name="SdtKH"><br /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Địa chỉ giao hàng:</label></td>
+                        <td><input type="text" placeholder="nhập Địa chỉ giao hàng" name="DiaChiGiaoHang"><br /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="pull-right">
+                            <button type="submit" style="color:black"><strong>Đặt hàng luôn</strong></button>
+                        </td>
+                    </tr>
+                </table>
+
+                <input type="hidden" id="inhoadon" name="Giohang" />
+            </form>
+        </div>
     </div>
+</div>
 
 
-</div>
-</div>
 <script>
     var giohang = localStorage.getItem("giohang");
+
+    document.getElementById("inhoadon").value = giohang;
+
     var listsanpham = [];
-
     var tongtien = 0;
-
-
 
     if (giohang.length > 0) {
         listsanpham = JSON.parse(giohang);
     }
 
-
-
     var table = document.getElementById("tablegiohang");
-
 
     for (var i = 0; i < listsanpham.length; i++) {
         var row = document.createElement("TR");
@@ -125,7 +181,6 @@
 
 
         table.appendChild(row);
-
     }
 
     function xoa(button) {
@@ -197,8 +252,3 @@
         document.getElementById("hienthigiohangrong").setAttribute("style", "display:block");
     }
 </script>
-
-
-
-
-</html>
