@@ -78,17 +78,9 @@ $product = $listProduct[0];
     ?>
 </div>
 
-
-
 <div class="rowInfo">
     <div class="imageInfo">
-
-        <?php
-
-        echo ' <img  id="hinhanh" src="' . $product['ImgPath'] . '">'
-
-        ?>
-
+        <?php echo ' <img  id="hinhanh" src="' . $product['ImgPath'] . '">' ?>
     </div>
     <div class="info">
         <h2>Thông tin kĩ thuật<h2>
@@ -96,77 +88,62 @@ $product = $listProduct[0];
                 <li>
                     <span>Màn hình </span>
                     <div>
-                        5.5", Retina HD
+                        <?php echo $product['ManHinh']; ?>
                     </div>
                 </li>
+
                 <li>
                     <span>Hệ điều hành</span>
                     <div>
-                        iOS 12
+                        <?php echo $product['HDH']; ?>
                     </div>
                 </li>
+
                 <li>
                     <span>Camera sau</span>
                     <div>
-                        Chính 12 MP &amp; Phụ 12 MP
+                        <?php echo $product['CameraSau']; ?>
                     </div>
                 </li>
+
                 <li>
                     <span>Camera trước</span>
                     <div>
-                        7 MP
+                        <?php echo $product['CameraTruoc']; ?>
                     </div>
                 </li>
+
                 <li>
 
                     <span>CPU</span>
                     <div>
-                        Apple A10 Fusion 4 nhân 64-bit
+                        <?php echo $product['CPU']; ?>
                     </div>
                 </li>
+
                 <li>
                     <span>RAM</span>
                     <div>
-                        3GB
+                        <?php echo $product['Ram']; ?>
                     </div>
                 </li>
+
                 <li>
                     <span>ROM</span>
                     <div>
-                        32 GB
+                        <?php echo $product['Rom']; ?>
                     </div>
                 </li>
+
                 <li>
                     <span>Dung lượng pin</span>
                     <div>
-                        2900 mAh
+                        <?php echo $product['DungLuongPin']; ?>
                     </div>
                 </li>
-                <button type="button" class="detail" onclick="openDetail()">
-                    Xem chi tiết thông tin
-                </button>
-    </div>
-</div>
+                <button onclick="themsanpham()">Mua Ngay</buton>
 
 
-
-
-
-
-<div class="rowInfo">
-    <div class="price_sale">
-        <div class="price">
-            <?php
-
-
-            echo '<strong id ="gia">' . $product['Gia'] . '</strong>đ'
-
-
-
-            ?>
-
-        </div>
-        <button onclick="themsanpham()">mua ngay</buton>
     </div>
     <div class="more">
         <ul>
@@ -177,249 +154,11 @@ $product = $listProduct[0];
     </div>
 </div>
 
-
-
-
-
-
-</div>
-<div id="hidden">
-    <div class="detail">
-        <div class="detailInfo">
-            <div class="info">
-                <li>
-                    <h3>Màn hình</h3>
-                </li>
-
-                <li>
-                    <span>Công nghệ màn hình</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Độ phân giải </span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Màn hình rộng</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Mặt kính cảm ứng</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <h3>Camera Sau</h3>
-                </li>
-
-                <li>
-                    <span>Độ phân giải</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>
-                        Quay phim
-                    </span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Đèn Flash</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Chụp ảnh nâng cao</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <h3>Camera trước</h3>
-                </li>
-
-                <li>
-                    <span>Độ phân giải</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>
-                        Videocall
-                    </span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Thông tin khác</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <h3>Hệ điều hành</h3>
-                </li>
-
-                <li>
-                    <span>Hệ điều hành</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>
-                        Tốc độ CPU
-                    </span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>GPU</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <h3>Bộ nhớ & lưu trữ</h3>
-                </li>
-
-                <li>
-                    <span>RAM</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>
-                        Bộ nhớ chung
-                    </span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Thẻ nhớ ngoài</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <h3>Kết nối</h3>
-                </li>
-
-                <li>
-                    <span>Mạng di động</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>
-                        SIM
-                    </span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Wifi</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>GPS</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>
-                        Bluetooth
-                    </span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Cổng kết nối</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <h3>Thiết kế và trọng lượng</h3>
-                </li>
-
-                <li>
-                    <span>Thiết kế</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>
-                        Chất liệu
-                    </span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Kích thước</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Trọng lượng</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <h3>Thông tin sạc và Pin</h3>
-                </li>
-
-                <li>
-                    <span>Dung lượng pin</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>
-                        Loại pin
-                    </span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-                <li>
-                    <span>Công nghệ pin</span>
-                    <div>
-                        chỉ số...
-                    </div>
-                </li>
-
-            </div>
+<div class="rowInfo">
+    <div class="price_sale">
+        <div class="price">
+            <?php echo '<strong id ="gia">' . $product['Gia'] . '</strong>đ'   ?>
         </div>
     </div>
-    <button onclick="closeDetail()">
-        X
-    </button>
+
 </div>

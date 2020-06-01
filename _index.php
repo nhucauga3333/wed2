@@ -11,6 +11,15 @@
             echo            "<p><strong>" . $listProduct[$i]['TenSP'] . "</strong></p>";
             echo            "<h3 class='amount'>" . $listProduct[$i]['Gia'] . "₫</h3>";
             echo            "<span>" . $listProduct[$i]['ID'] . "</span><br>";
+            echo    "<span>Màn Hình: " . $listProduct[$i]['ManHinh'] . "</span><br>";
+            echo    "<span>HĐH: " . $listProduct[$i]['HDH'] . "</span><br>";
+            echo    "<span>Camera Sau: " . $listProduct[$i]['CameraSau'] . "</span><br>";
+            echo    "<span>Camera Trước: " . $listProduct[$i]['CameraTruoc'] . "</span><br>";
+            echo    "<span>CPU: " . $listProduct[$i]['CPU'] . "</span><br>";
+            echo    "<span>Ram: " . $listProduct[$i]['Ram'] . "</span><br>";
+            echo    "<span>Rom: " . $listProduct[$i]['Rom'] . "</span><br>";
+            echo    "<span>Dung Lượng Pin: " . $listProduct[$i]['DungLuongPin'] . "</span>";
+
             echo        "</div>";
             echo "</div>";
         }
