@@ -141,7 +141,10 @@ $product = $listProduct[0];
                         <?php echo $product['DungLuongPin']; ?>
                     </div>
                 </li>
-                <button onclick="themsanpham()">Mua Ngay</buton>
+                <button type="button" class="detail" onclick="themsanpham()">
+                   Mua Ngay
+                </button>
+                
 
 
     </div>
