@@ -148,20 +148,22 @@ $product = $listProduct[0];
 
 
     </div>
-    <div class="more">
-        <ul>
-            <li>Trong hộp có: Sạc, Tai nghe, Sách hướng dẫn, Cáp, Cây lấy sim, Ốp lưng</li>
-            <li>Bảo hành chính hãng 12 tháng. </li>
-        </ul>
-
-    </div>
+    
 </div>
 
 <div class="rowInfo">
     <div class="price_sale">
         <div class="price">
-            <?php echo '<strong id ="gia">' . $product['Gia'] . '</strong>đ'   ?>
+            <?php echo '<strong id ="gia">' . $product['Gia'] . ' </strong><strong> đ</strong>'   ?>
         </div>
+    </div>
+
+    <div class="more">
+        <ul>
+            <li>Trong hộp có: Sạc, Tai nghe, Sách hướng dẫn, Cây lấy sim, Ốp lưng</li>
+            <li>Bảo hành chính hãng 12 tháng. </li>
+        </ul>
+
     </div>
 
 </div>

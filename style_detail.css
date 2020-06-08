@@ -168,11 +168,11 @@ button.detail{
 }
 div.price_sale
 {
-    height: 100px;
-    float: left;
-    width: 40%;
-    margin-left: 5%;
-    margin-right: 37.58px;
+
+    float:left;
+    width: 360px;
+    text-align:center;
+    margin-top:20px;
 }
 
 div.price strong
@@ -198,18 +198,23 @@ div.price_sale a
     display: inline-block;
     width: 200px;
 }
-div.more{ height: 100px;}
+div.more{
+    float: right;
+    width:500px;
+ }
 div.more ul
 {
-    margin-top:26px ;
-    float: left;
-    display: block;
-    overflow: hidden;
+
     border: 1px solid #ddd;
     border-radius: 3px;
-    padding-bottom: 5px;
-    padding-top: 10px;
+
 }
+
+div.more ul li
+{
+    padding: 5px 2px 5px 2px;    
+}
+
 div#hidden
 {
     

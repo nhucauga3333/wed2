@@ -154,13 +154,19 @@ body{
 .table ,th ,td{
   border: 1px solid #ccc;
   border-collapse: collapse;
+  padding: 5px;
+}
+
+.table ,td:nth-child(3) { 
+  text-align: center;
 }
 
 .b{
   font-size: 24px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-p{
+
+.introduce p{
   font-size:18px;
   font-family:arial;
 }

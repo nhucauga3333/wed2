@@ -37,7 +37,7 @@ if (mysqli_num_rows($result) > 0) {
         for ($i = 0; $i < count($listSanPhamBanChay); $i++) {
             echo "<div class='product'>";
             echo        "<div class='pImage'>";
-            echo        '    <a href="ctsanpham.php?ID=' . $listSanPhamBanChay[$i]['ID'] . '" ><img src="image/iphone/iphone-7-plus-32gb.jpg"/></a>';
+            echo        '    <a href="ctsanpham.php?ID=' . $listSanPhamBanChay[$i]['ID'] . '" ><img src="'. $listSanPhamBanChay[$i]['ImgPath'].'"></a>';
             echo        "</div>";
             echo        "<div class='pInfo'>";
             echo            "<p><strong>" . $listSanPhamBanChay[$i]['TenSP'] . "</strong></p>";
@@ -51,20 +51,25 @@ if (mysqli_num_rows($result) > 0) {
             echo    "<span>Ram: " . $listSanPhamBanChay[$i]['Ram'] . "</span><br>";
             echo    "<span>Rom: " . $listSanPhamBanChay[$i]['Rom'] . "</span><br>";
             echo    "<span>Dung Lượng Pin: " . $listSanPhamBanChay[$i]['DungLuongPin'] . "</span>";
-
             echo        "</div>";
             echo "</div>";
+
+       
         }
+        
         ?>
     </div>
+</div>
 
-    <h1>Sản phẩm mới nhất</h1>
+<div class="productArea" style="clear:both; margin-top: 20px">
+<br><br>
+<h1>Sản phẩm mới nhất</h1>
     <div class="production_selling">
         <?php
         for ($i = 0; $i < count($listSanPhamMoiNhat); $i++) {
             echo "<div class='product'>";
             echo        "<div class='pImage'>";
-            echo        '    <a href="ctsanpham.php?ID=' . $listSanPhamMoiNhat[$i]['ID'] . '" ><img src="image/iphone/iphone-7-plus-32gb.jpg"/></a>';
+            echo        '    <a href="ctsanpham.php?ID=' . $listSanPhamMoiNhat[$i]['ID'] . '" ><img src="' . $listSanPhamMoiNhat[$i]['ImgPath'] . '"></a>';
             echo        "</div>";
             echo        "<div class='pInfo'>";
             echo            "<p><strong>" . $listSanPhamMoiNhat[$i]['TenSP'] . "</strong></p>";
@@ -78,11 +83,9 @@ if (mysqli_num_rows($result) > 0) {
             echo    "<span>Ram: " . $listSanPhamMoiNhat[$i]['Ram'] . "</span><br>";
             echo    "<span>Rom: " . $listSanPhamMoiNhat[$i]['Rom'] . "</span><br>";
             echo    "<span>Dung Lượng Pin: " . $listSanPhamMoiNhat[$i]['DungLuongPin'] . "</span>";
-
             echo        "</div>";
             echo "</div>";
         }
         ?>
     </div>
-
 </div>

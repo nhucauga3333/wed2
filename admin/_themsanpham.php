@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $target_dir = "../image/";
+    $target_dir = "image/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -28,13 +28,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    $sql =  $conn->prepare("INSERT INTO SANPHAM (MaSP,MaLoai,TenSP, Gia, ImgPath) VALUES (?,?,?,?,?)");
-    $sql->bind_param("sisis", $MaSP, $MaLoai, $TenSP, $Gia, $ImgPath);
+    $sql =  $conn->prepare("INSERT INTO SANPHAM (MaSP,MaLoai,TenSP, Gia, ImgPath,ManHinh,HDH,CameraSau,CameraTruoc,CPU,Ram,Rom,DungLuongPin,SanPhamBanChay,SanPhamMoiNhat) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $sql->bind_param("sisisssssssssii", $MaSP, $MaLoai, $TenSP, $Gia, $ImgPath,$ManHinh,$HDH,$CameraSau,$CameraTruoc,$CPU,$Ram,$Rom,$DungLuongPin,$SanPhamBanChay,$SanPhamMoiNhat);
+
 
     $MaSP = $_REQUEST['MaSP'];
     $MaLoai = $_REQUEST['MaLoai'];
     $TenSP = $_REQUEST['TenSP'];
     $Gia = $_REQUEST['Gia'];
+
+
+
+
+    $ManHinh = $_REQUEST['ManHinh'];
+    $HDH = $_REQUEST['HDH'];
+    $CameraSau = $_REQUEST['CameraSau'];
+    $CameraTruoc = $_REQUEST['CameraTruoc'];
+
+    $CPU = $_REQUEST['CPU'];
+    $Ram = $_REQUEST['Ram'];
+    $Rom = $_REQUEST['Rom'];
+    $DungLuongPin = $_REQUEST['DungLuongPin'];
+    $SanPhamBanChay = $_REQUEST['SanPhamBanChay'];
+    $SanPhamMoiNhat = $_REQUEST['SanPhamMoiNhat'];
     $ImgPath = $target_file;
 
     $sql->execute();
@@ -68,6 +84,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <tr>
                     <td>Mã Loại</td>
                     <td><input type="text" name="MaLoai" /></td>
+                </tr>
+
+                <tr>
+                    <td>Màn Hình</td>
+                    <td><input type="text" name="ManHinh" /></td>
+                </tr>
+
+                <tr>
+                    <td>HĐH</td>
+                    <td><input type="text" name="HDH" /></td>
+                </tr>
+
+                <tr>
+                    <td>Camera Sau</td>
+                    <td><input type="text" name="CameraSau" /></td>
+                </tr>
+
+                <tr>
+                    <td>Camera Trước</td>
+                    <td><input type="text" name="CameraTruoc" /></td>
+                </tr>
+
+                <tr>
+                    <td>CPU</td>
+                    <td><input type="text" name="CPU" /></td>
+                </tr>
+
+                <tr>
+                    <td>Ram</td>
+                    <td><input type="text" name="Ram" /></td>
+                </tr>
+
+                <tr>
+                    <td>Rom</td>
+                    <td><input type="text" name="Rom" /></td>
+                </tr>
+
+                <tr>
+                    <td>Dung Lượng Pin</td>
+                    <td><input type="text" name="DungLuongPin" /></td>
+                </tr>
+
+                <tr>
+                    <td>Sản Phẩm Bán Chạy</td>
+                    <td><input type="text" name="SanPhamBanChay" /></td>
+                </tr>
+
+                <tr>
+                    <td>Sản Phẩm Mới Nhất</td>
+                    <td><input type="text" name="SanPhamMoiNhat" /></td>
                 </tr>
 
                 <tr>

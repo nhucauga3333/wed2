@@ -46,6 +46,12 @@ session_start();
        
     }
 
+    $timkiemTen = "";
+
+    if(isset($_GET['TenSP'])){
+        $timkiemTen = $_GET['TenSP'];
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +74,9 @@ session_start();
                         <a href="giohang.php">Giỏ Hàng</a>
                         <form action="timkiemsanpham.php" method = "GET">
                             <a href="#" onclick='alert("đang gọi vui lòng chờ để được tư vấn")' >Hotline: 1900</a>
-                            <input type="text" name = "TenSP" placeholder="Tìm kiếm..">
+                        <?php
+                            echo    '<input type="text" value="'.$timkiemTen.'" name="TenSP"  placeholder="Tìm kiếm..">'
+                        ?>
                         </form>
                     </div>
                 </div>

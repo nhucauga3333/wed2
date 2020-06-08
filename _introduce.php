@@ -12,11 +12,11 @@
     <b class="b">“Thu cũ - đổi mới”</b>
     <p>là một chương trình hấp dẫn khi khách hàng đang có dự định lên đời sản phẩm mới. Nhằm hỗ trợ khách hàng, Minh Lộc Mobile thu lại sản phẩm cũ với giá cao và ưu đãi cho khách hàng khi lên đời sản phẩm mới.</p>
 
-    <span>--------------------------</span><br>
+    <br>
     <span style="color:#000000;">🔵&nbsp;</span>
     <b class="b">Thời gian áp dụng :</b>
     <p>Cho đến khi có thông báo mới.</p>
-    <span>--------------------------</span><br>
+   <br>
     <span style="color:#000000;">🔵&nbsp;</span>
     <b class="b">Cách thức tham gia :</b>
 
@@ -29,7 +29,7 @@
 
     <img src="image/Untitled.png">
 
-    <span>--------------------------</span><br>
+    <br>
     <span style="color:#000000;">🔵&nbsp;</span>
     <b class="b">Điều kiện thu lại sản phẩm: </b>
 
@@ -207,5 +207,7 @@
         </tr>
     </table>
 
-    <p>------------------------------------------------------</p>
+   <center>
+   <p>------------------------------------------------------</p>
+   </center>
 </div>
