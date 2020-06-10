@@ -1,4 +1,9 @@
 <?php
+
+
+
+
+
 $sql = "SELECT S.ID,  S.TenSP,S.Gia,L.TenLoai
     FROM SANPHAM S
     INNER JOIN loaisp L ON S.MaLoai = L.ID";
@@ -14,10 +19,10 @@ if (mysqli_num_rows($result) > 0) {
     }
 }
 ?>
-
+<?php echo $_SESSION ["dangnhap"] ?>
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title">Danh sách sản phẩm</h5>
+        <h5 class="card-title">Danh sách sản phẩm </h5>
     </div>
     <div class="card-body" style="min-height:700px">
         <a href="themsanpham.php">Thêm mới</a>

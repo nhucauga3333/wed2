@@ -1,5 +1,7 @@
 <?php
 
+
+
 $sql = "SELECT * FROM SANPHAM WHERE ID = " . $_GET['ID'];
 $result = mysqli_query($conn, $sql);
 $listProduct = array();
