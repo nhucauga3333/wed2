@@ -52,7 +52,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 
-$nav  = '';                        //no la 1 chuoi
+$nav  = ''; //no la 1 chuoi
 
 for ($i = 1; $i <= $total_page; $i++) {
     if ($i == $page) {
@@ -133,7 +133,7 @@ else
         <?php
             echo $first . $prev . $nav . $next . $last;
         ?>
-    </div>
+</div>
     <!-- 'end hiện nút phân trang' -->
 
    

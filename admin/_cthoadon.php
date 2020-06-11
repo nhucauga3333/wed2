@@ -90,7 +90,7 @@ $conn->close();
                     <tr>
                         <td><label>Trạng Thái</label></td>
                         <?php
-                            echo '<td><input type="text"  value = "' . $HoaDon["TrangThai"] . '" name="TrangThai"></td>'
+                            echo '<td><input type="text"  value = "' . $listctHoaDon["TrangThai"] . '" name="TrangThai"></td>'
                         ?>
                     </tr>
                     <tr>

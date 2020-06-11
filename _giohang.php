@@ -106,7 +106,49 @@ function randomNumber($length)
             <p style="font-size: large; color: #d0021b;">THÔNG TIN KHÁCH HÀNG</p>
 
 
-            <form class="form-inline" action="giohang.php" method="POST">
+
+            <script>
+                
+
+
+                function validateForm() {
+                    var name = document.forms["form"]["TenKH"].value;
+                    if (name == "") {
+                        alert("Vui Lòng Nhập Tên");
+                        return false;
+                    }
+
+                    var sdt = document.forms["form"]["SdtKH"].value;
+                    if (sdt == "" || sdt > 1000000000 || sdt < 9999999999) {
+                        alert("Vui Lòng Nhập SĐT");
+                        return false;
+                    }
+
+                    $(document).ready(function() {
+                    $('body').on('click', '.checkmobile', function() {
+                        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+                        var mobile = $('#mobile').val();
+                        if (mobile !== '') {
+                            if (vnf_regex.test(mobile) == false) {
+                                alert('Số điện thoại của bạn không đúng định dạng!');
+                            } else {
+                                alert('Số điện thoại của bạn hợp lệ!');
+                            }
+                        } else {
+                            alert('Bạn chưa điền số điện thoại!');
+                        }
+                    });
+                });
+
+                    var diachi = document.forms["form"]["DiaChiGiaoHang"].value;
+                    if (diachi == "") {
+                        alert("Vui Lòng Nhập Địa chỉ");
+                        return false;
+                    }
+                }
+            </script>
+
+            <form class="form-inline" name="form" action="giohang.php" method="POST" onsubmit="return validateForm()">
                 <table>
                     <tr>
                         <td><label>Họ và tên: *</label></td>
@@ -227,8 +269,6 @@ function randomNumber($length)
         }
 
         localStorage.setItem("giohang", JSON.stringify(listsanpham));
-
-
         window.location.href = "giohang.php";
 
 
@@ -244,7 +284,6 @@ function randomNumber($length)
     //tinhsoluongsanpham
 
     document.getElementById("tongsosanpham").innerHTML = listsanpham.length;
-
 
     if (listsanpham.length > 0) {
         document.getElementById("hienthigiohang").setAttribute("style", "display:block");

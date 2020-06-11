@@ -2,7 +2,7 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $target_dir = "image/";
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $target_file = basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -22,14 +22,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return 0;
         // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        $target_file = $target_dir . date('dmYHis') . basename($_FILES["fileToUpload"]["name"]);
+     
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],"../". $target_file)) {
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
     }
 
     $sql =  $conn->prepare("INSERT INTO SANPHAM (MaSP,MaLoai,TenSP, Gia, ImgPath,ManHinh,HDH,CameraSau,CameraTruoc,CPU,Ram,Rom,DungLuongPin,SanPhamBanChay,SanPhamMoiNhat) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $sql->bind_param("sisisssssssssii", $MaSP, $MaLoai, $TenSP, $Gia, $ImgPath,$ManHinh,$HDH,$CameraSau,$CameraTruoc,$CPU,$Ram,$Rom,$DungLuongPin,$SanPhamBanChay,$SanPhamMoiNhat);
+    $sql->bind_param("sisisssssssssii", $MaSP, $MaLoai, $TenSP, $Gia, $ImgPath, $ManHinh, $HDH, $CameraSau, $CameraTruoc, $CPU, $Ram, $Rom, $DungLuongPin, $SanPhamBanChay, $SanPhamMoiNhat);
 
 
     $MaSP = $_REQUEST['MaSP'];
@@ -49,9 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Ram = $_REQUEST['Ram'];
     $Rom = $_REQUEST['Rom'];
     $DungLuongPin = $_REQUEST['DungLuongPin'];
-    $SanPhamBanChay = $_REQUEST['SanPhamBanChay'];
-    $SanPhamMoiNhat = $_REQUEST['SanPhamMoiNhat'];
+    $SanPhamBanChay = isset($_REQUEST['SanPhamBanChay']) ? 1 : 0;
+    $SanPhamMoiNhat = isset($_REQUEST['SanPhamMoiNhat']) ? 1 : 0;
     $ImgPath = $target_file;
+
 
     $sql->execute();
     $sql->close();
@@ -68,72 +71,80 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="card-body" style="min-height:250px">
         <form action="themsanpham.php" method="POST" enctype="multipart/form-data">
-            <table>
+            <table class="table table-borderless " style="font-size: 14px">
                 <tr>
                     <td>Mã Sản Phẩm</td>
-                    <td><input type="text" name="MaSP" /></td>
+                    <td><input class="form-control" type="text" name="MaSP" /></td>
                 </tr>
                 <tr>
                     <td>Tên Sản Phẩm</td>
-                    <td><input type="text" name="TenSP" /></td>
+                    <td><input class="form-control" type="text" name="TenSP" /></td>
                 </tr>
                 <tr>
                     <td>Giá</td>
-                    <td><input type="text" name="Gia" /></td>
+                    <td><input class="form-control" type="number" name="Gia" /></td>
                 </tr>
                 <tr>
                     <td>Mã Loại</td>
-                    <td><input type="text" name="MaLoai" /></td>
+                    <td><input class="form-control" type="text" name="MaLoai" /></td>
                 </tr>
 
                 <tr>
                     <td>Màn Hình</td>
-                    <td><input type="text" name="ManHinh" /></td>
+                    <td><input class="form-control" type="text" name="ManHinh" /></td>
                 </tr>
 
                 <tr>
                     <td>HĐH</td>
-                    <td><input type="text" name="HDH" /></td>
+                    <td><input class="form-control" type="text" name="HDH" /></td>
                 </tr>
 
                 <tr>
                     <td>Camera Sau</td>
-                    <td><input type="text" name="CameraSau" /></td>
+                    <td><input class="form-control" type="text" name="CameraSau" /></td>
                 </tr>
 
                 <tr>
                     <td>Camera Trước</td>
-                    <td><input type="text" name="CameraTruoc" /></td>
+                    <td><input class="form-control" type="text" name="CameraTruoc" /></td>
                 </tr>
 
                 <tr>
                     <td>CPU</td>
-                    <td><input type="text" name="CPU" /></td>
+                    <td><input class="form-control" type="text" name="CPU" /></td>
                 </tr>
 
                 <tr>
                     <td>Ram</td>
-                    <td><input type="text" name="Ram" /></td>
+                    <td><input class="form-control" type="text" name="Ram" /></td>
                 </tr>
 
                 <tr>
                     <td>Rom</td>
-                    <td><input type="text" name="Rom" /></td>
+                    <td><input class="form-control" type="text" name="Rom" /></td>
                 </tr>
 
                 <tr>
                     <td>Dung Lượng Pin</td>
-                    <td><input type="text" name="DungLuongPin" /></td>
+                    <td><input class="form-control" type="text" name="DungLuongPin" /></td>
                 </tr>
 
                 <tr>
-                    <td>Sản Phẩm Bán Chạy</td>
-                    <td><input type="text" name="SanPhamBanChay" /></td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <input type="checkbox" name="SanPhamBanChay" />
+                         Sản Phẩm Bán Chạy
+                    </td>
                 </tr>
 
                 <tr>
-                    <td>Sản Phẩm Mới Nhất</td>
-                    <td><input type="text" name="SanPhamMoiNhat" /></td>
+                    <td></td>
+                    <td>
+                        <input type="checkbox" name="SanPhamMoiNhat" />
+                         Sản Phẩm Mới Nhất
+                    </td>
                 </tr>
 
                 <tr>
