@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // if everything is ok, try to upload file
     } else {
         $target_file = $target_dir . date('dmYHis') . basename($_FILES["fileToUpload"]["name"]);
-     
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],"../". $target_file)) {
+
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], "../" . $target_file)) {
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
@@ -62,6 +62,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     header('Location: quanlysanpham.php');
 }
+
+
+$sql =  $conn->prepare("SELECT * FROM LOAISP L");
+
+$sql->execute();
+
+$result = $sql->get_result();
+
+$listLoaiSP = array();
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while ($row = mysqli_fetch_assoc($result)) {
+        $listLoaiSP[] = $row;
+    }
+}
+
+
+
 ?>
 <div class="card">
 
@@ -84,9 +103,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <td>Giá</td>
                     <td><input class="form-control" type="number" name="Gia" /></td>
                 </tr>
+
+
+
                 <tr>
                     <td>Mã Loại</td>
-                    <td><input class="form-control" type="text" name="MaLoai" /></td>
+                    <td>
+                        <select class="form-control" name="MaLoai" id="cars">
+                            <?php
+                            for ($i = 0; $i < count($listLoaiSP); $i++) {
+                                echo ' <option value="'.$listLoaiSP[$i]['ID'].'">'.$listLoaiSP[$i]['TenLoai'].'</option>';
+                            }
+                            ?>
+
+
+                        </select>
+
+
+
+
+
+                    </td>
                 </tr>
 
                 <tr>
@@ -135,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </td>
                     <td>
                         <input type="checkbox" name="SanPhamBanChay" />
-                         Sản Phẩm Bán Chạy
+                        Sản Phẩm Bán Chạy
                     </td>
                 </tr>
 
@@ -143,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <td></td>
                     <td>
                         <input type="checkbox" name="SanPhamMoiNhat" />
-                         Sản Phẩm Mới Nhất
+                        Sản Phẩm Mới Nhất
                     </td>
                 </tr>
 
@@ -153,7 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="Thêm" /></td>
+                    <td><input class="btn btn-primary" type="submit" value="Thêm" /></td>
                 </tr>
             </table>
         </form>
