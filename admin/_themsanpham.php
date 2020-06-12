@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql->close();
     $conn->close();
 
-    header('Location: quanlysanpham.php');
+    //header('Location: quanlysanpham.php');
 }
 
 
@@ -90,6 +90,7 @@ if (mysqli_num_rows($result) > 0) {
 
     <div class="card-body" style="min-height:250px">
         <form action="themsanpham.php" method="POST" enctype="multipart/form-data">
+
             <table class="table table-borderless " style="font-size: 14px">
                 <tr>
                     <td>Mã Sản Phẩm</td>
@@ -103,9 +104,6 @@ if (mysqli_num_rows($result) > 0) {
                     <td>Giá</td>
                     <td><input class="form-control" type="number" name="Gia" /></td>
                 </tr>
-
-
-
                 <tr>
                     <td>Mã Loại</td>
                     <td>
@@ -115,14 +113,7 @@ if (mysqli_num_rows($result) > 0) {
                                 echo ' <option value="'.$listLoaiSP[$i]['ID'].'">'.$listLoaiSP[$i]['TenLoai'].'</option>';
                             }
                             ?>
-
-
                         </select>
-
-
-
-
-
                     </td>
                 </tr>
 
@@ -168,7 +159,6 @@ if (mysqli_num_rows($result) > 0) {
 
                 <tr>
                     <td>
-
                     </td>
                     <td>
                         <input type="checkbox" name="SanPhamBanChay" />
@@ -194,5 +184,6 @@ if (mysqli_num_rows($result) > 0) {
                 </tr>
             </table>
         </form>
+
     </div>
 </div>

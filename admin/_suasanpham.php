@@ -2,8 +2,78 @@
 
 
 
-$sql = "SELECT * FROM SANPHAM WHERE ID = " . $_GET['ID'];
-$result = mysqli_query($conn, $sql);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $sql =  $conn->prepare("UPDATE sanpham
+        SET MaSP = ?, MaLoai = ?, TenSP = ?,Gia = ?,ImgPath = ?,ManHinh = ?,CPU = ?,CameraSau = ?,CameraTruoc = ?,HDH = ?,Ram = ?,Rom = ?,DungLuongPin = ?,SanPhamBanChay=?,SanPhamMoiNhat=?
+        WHERE ID = ?;");
+
+
+
+    $target_file = "";
+
+    if (!file_exists($_FILES['fileToUpload']['tmp_name']) || !is_uploaded_file($_FILES['fileToUpload']['tmp_name'])) {
+        $sql =  $conn->prepare("UPDATE sanpham
+                	            SET MaSP = ?, MaLoai = ?, TenSP = ?,Gia = ?,ManHinh = ?,CPU = ?,CameraSau = ?,CameraTruoc = ?,HDH = ?,Ram = ?,Rom = ?,DungLuongPin = ?,SanPhamBanChay=?,SanPhamMoiNhat=?
+                                WHERE ID = ?;");
+        $sql->bind_param("sisissssssssiii", $MaSP, $MaLoai, $TenSP, $Gia, $ManHinh, $CPU, $CameraSau, $CameraTruoc, $HDH, $Ram, $Rom, $DungLuongPin, $SanPhamBanChay, $SanPhamMoiNhat, $ID);
+    } else {
+
+        $sql =  $conn->prepare("UPDATE sanpham
+                                SET MaSP = ?, MaLoai = ?, TenSP = ?,Gia = ?,ImgPath = ?,ManHinh = ?,CPU = ?,CameraSau = ?,CameraTruoc = ?,HDH = ?,Ram = ?,Rom = ?,DungLuongPin = ?,SanPhamBanChay=?,SanPhamMoiNhat=?
+                                WHERE ID = ?;");
+        $sql->bind_param("sisisssssssssiii", $MaSP, $MaLoai, $TenSP, $Gia, $ImgPath, $ManHinh, $CPU, $CameraSau, $CameraTruoc, $HDH, $Ram, $Rom, $DungLuongPin, $SanPhamBanChay, $SanPhamMoiNhat, $ID);
+
+        $target_dir = "image/";
+        $target_file = $target_dir  . date('dmYHis') . basename($_FILES["fileToUpload"]["name"]);
+
+      
+
+        
+        move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],'../' . $target_file);
+    }
+
+
+
+    $MaSP = $_REQUEST['MaSP'];
+    $MaLoai = $_REQUEST['MaLoai'];
+    $TenSP = $_REQUEST['TenSP'];
+    $Gia = $_REQUEST['Gia'];
+    $ID = $_REQUEST['ID'];
+
+    $ManHinh = $_REQUEST['ManHinh'];
+    $HDH = $_REQUEST['HDH'];
+    $CameraSau = $_REQUEST['CameraSau'];
+    $CameraTruoc = $_REQUEST['CameraTruoc'];
+
+    $CPU = $_REQUEST['CPU'];
+    $Ram = $_REQUEST['Ram'];
+    $Rom = $_REQUEST['Rom'];
+    $DungLuongPin = $_REQUEST['DungLuongPin'];
+
+    $SanPhamBanChay = isset($_REQUEST['SanPhamBanChay']) ? 1 : 0;
+    $SanPhamMoiNhat = isset($_REQUEST['SanPhamMoiNhat']) ? 1 : 0;
+    $ImgPath =  $target_file;
+
+
+
+
+    $sql->execute();
+
+
+
+
+
+    //header('Location: quanlysanpham.php');
+
+}
+
+$sql =  $conn->prepare("SELECT * FROM SANPHAM WHERE ID = ?");
+$sql->bind_param("i", $_GET['ID']);
+$sql->execute();
+
+$result = $sql->get_result();
+
+
 $listProduct = array();
 
 if (mysqli_num_rows($result) > 0) {
@@ -16,67 +86,22 @@ if (mysqli_num_rows($result) > 0) {
 $product = $listProduct[0];
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $sql =  $conn->prepare("UPDATE sanpham
-        SET MaSP = ?, MaLoai = ?, TenSP = ?,Gia = ?,ImgPath = ?
-        WHERE ID = ?;");
+$sql =  $conn->prepare("SELECT * FROM LOAISP L");
 
-    $target_file = "";
+$sql->execute();
 
-    if (!file_exists($_FILES['fileToUpload']['tmp_name']) || !is_uploaded_file($_FILES['fileToUpload']['tmp_name'])) {
-        $sql =  $conn->prepare("UPDATE sanpham
-            SET MaSP = ?, MaLoai = ?, TenSP = ?,Gia = ?
-            WHERE ID = ?;");
+$result = $sql->get_result();
 
-        $sql->bind_param("sisii", $MaSP, $MaLoai, $TenSP, $Gia, $ID);
-    } else {
+$listLoaiSP = array();
 
-
-
-        $target_dir = "../image/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        // Allow certain file formats
-        if (
-            $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif"
-        ) {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-            $uploadOk = 0;
-        }
-
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-            echo "<a href = 'themsanpham.php'>Quay Lại</a>";
-            return 0;
-            // if everything is ok, try to upload file
-        } else {
-
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-        }
-
-        $sql->bind_param("sisisi", $MaSP, $MaLoai, $TenSP, $Gia, $ImgPath, $ID);
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while ($row = mysqli_fetch_assoc($result)) {
+        $listLoaiSP[] = $row;
     }
-
-    $MaSP = $_REQUEST['MaSP'];
-    $MaLoai = $_REQUEST['MaLoai'];
-    $TenSP = $_REQUEST['TenSP'];
-    $Gia = $_REQUEST['Gia'];
-    $ID = $_REQUEST['ID'];
-    $ImgPath =  $target_file;
-    $sql->execute();
-
-    $sql->close();
-    $conn->close();
-
-    header('Location: quanlysanpham.php');
 }
+
+
 ?>
 <div class="card">
     <div class="card-header">
@@ -84,41 +109,109 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <div class="card-body" style="min-height:250px">
 
-        <?php
-        echo '<form action = "suasanpham.php?ID=' . $product['ID'] . '" method ="POST" enctype="multipart/form-data">';
-        echo '<input type = "hidden" name = "ID" value = "' . $product['ID'] . '" />';
-        echo   '<table >';
-        echo        '<tr>';
-        echo            '<td>Mã Sản Phẩm</td>';
-        echo           '<td><input type = "text" name = "MaSP" value = "' . $product['MaSP'] . '" /></td>';
-        echo        '</tr>';
-        echo       '<tr>';
-        echo          '<td>Tên Sản Phẩm</td>';
-        echo        '<td><input type = "text" name = "TenSP" value = "' . $product['TenSP'] . '" /></td>';
-        echo    '</tr>';
-        echo    '<tr>';
-        echo        '<td>Giá</td>';
-        echo        '<td><input type = "text" name = "Gia" value = "' . $product['Gia'] . '"/></td>';
-        echo    '</tr>';
-        echo    '<tr>';
-        echo        '<td>Mã Loại</td>';
-        echo        '<td><input type = "text" name = "MaLoai" value = "' . $product['MaLoai'] . '" /></td>';
-        echo    '</tr>';
-        echo    '<tr>';
-        echo        '<td>Hình Ảnh</td>';
-        echo        '<td><img width ="200px" src = "' . $product['ImgPath'] . '"/></td>';
-        echo    '</tr>';
-        echo    '<tr>';
-        echo        '<td>Thay Đổi Hình Ảnh</td>';
-        echo        '<td><input type="file" name="fileToUpload" id="fileToUpload"></td>';
-        echo    '</tr>';
-        echo    '<tr>';
-        echo        '<td></td>';
-        echo        '<td><input type = "submit" value = "Cập Nhật" /></td>';
-        echo    '</tr>';
-        echo    '</table>';
-        echo '</form>';
 
-        ?>
+        <form action="suasanpham.php?ID=<?php echo $product['ID'] ?> " method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="ID" value="<?php echo $product['ID'] ?>" />
+            <table class="table table-borderless " style="font-size: 14px">
+                <tr>
+                    <td>Mã Sản Phẩm</td>
+                    <td><input class="form-control" type="text" name="MaSP" value="<?php echo $product['MaSP'] ?>" /></td>
+                </tr>
+                <tr>
+                    <td>Tên Sản Phẩm</td>
+                    <td><input class="form-control" type="text" name="TenSP" value="<?php echo $product['TenSP'] ?>" /></td>
+                </tr>
+                <tr>
+                    <td>Giá</td>
+                    <td><input class="form-control" type="number" name="Gia" value="<?php echo $product['Gia'] ?>" /></td>
+                </tr>
+                <tr>
+                    <td>Mã Loại</td>
+                    <td>
+                        <select class="form-control" name="MaLoai" id="cars">
+                            <?php
+                            for ($i = 0; $i < count($listLoaiSP); $i++) {
+                                if ($listLoaiSP[$i]['ID'] == $product['MaLoai']) {
+                                    echo ' <option selected value="' . $listLoaiSP[$i]['ID'] . '">' . $listLoaiSP[$i]['TenLoai'] . '</option>';
+                                } else {
+                                    echo ' <option value="' . $listLoaiSP[$i]['ID'] . '">' . $listLoaiSP[$i]['TenLoai'] . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Màn Hình</td>
+                    <td><input class="form-control" type="text" name="ManHinh" value="<?php echo $product['ManHinh'] ?>" /></td>
+                </tr>
+
+                <tr>
+                    <td>HĐH</td>
+                    <td><input class="form-control" type="text" name="HDH" value="<?php echo $product['HDH'] ?>" /></td>
+                </tr>
+
+                <tr>
+                    <td>Camera Sau</td>
+                    <td><input class="form-control" type="text" name="CameraSau" value="<?php echo $product['CameraSau'] ?>" /></td>
+                </tr>
+
+                <tr>
+                    <td>Camera Trước</td>
+                    <td><input class="form-control" type="text" name="CameraTruoc" value="<?php echo $product['CameraTruoc'] ?>" /></td>
+                </tr>
+
+                <tr>
+                    <td>CPU</td>
+                    <td><input class="form-control" type="text" name="CPU" value="<?php echo $product['CPU'] ?>" /></td>
+                </tr>
+
+                <tr>
+                    <td>Ram</td>
+                    <td><input class="form-control" type="text" name="Ram" value="<?php echo $product['Ram'] ?>" /></td>
+                </tr>
+
+                <tr>
+                    <td>Rom</td>
+                    <td><input class="form-control" type="text" name="Rom" value="<?php echo $product['Rom'] ?>" /></td>
+                </tr>
+
+                <tr>
+                    <td>Dung Lượng Pin</td>
+                    <td><input class="form-control" type="text" name="DungLuongPin" value="<?php echo $product['DungLuongPin'] ?>" /></td>
+                </tr>
+
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="SanPhamBanChay" <?php if ($product['SanPhamBanChay'] == 1) echo " checked" ?> />
+                        Sản Phẩm Bán Chạy
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="checkbox" name="SanPhamMoiNhat" <?php if ($product['SanPhamMoiNhat'] == 1) echo " checked" ?> />
+                        Sản Phẩm Mới Nhất
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Chọn Hình Ảnh</td>
+                    <td>
+                        <img height="150" src="<?php echo "../" . $product['ImgPath'] ?>">
+                        <input type="file" name="fileToUpload" id="fileToUpload">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input class="btn btn-primary" type="submit" value="Thêm" /></td>
+                </tr>
+            </table>
+        </form>
+
     </div>
 </div>
