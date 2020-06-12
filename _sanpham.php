@@ -102,14 +102,13 @@ else
     <div class="production_selling">
         <?php
         for ($i = 0; $i < count($listProduct); $i++) {
-            echo "<div class='product'>";
+            echo "<div class='product'style='min-height:550px'>";
             echo        "<div class='pImage'>";
             echo        '    <a href="ctsanpham.php?ID=' . $listProduct[$i]['ID'] . '" ><img src="' . $listProduct[$i]['ImgPath'] . '"></a>';
             echo        "</div>";
             echo        "<div class='pInfo'>";
             echo            "<p><strong>" . $listProduct[$i]['TenSP'] . "</strong></p>";
-            echo            "<h3 class='amount'>" . $listProduct[$i]['Gia'] . "₫</h3>";
-                      
+            echo            "<h3 class='amount'>" . $listProduct[$i]['Gia'] . "₫</h3>";                      
             echo    "<span>Màn Hình: " . $listProduct[$i]['ManHinh'] . "</span><br>";
             echo    "<span>HĐH: " . $listProduct[$i]['HDH'] . "</span><br>";
             echo    "<span>Camera Sau: " . $listProduct[$i]['CameraSau'] . "</span><br>";

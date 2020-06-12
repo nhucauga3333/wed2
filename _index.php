@@ -42,7 +42,6 @@ if (mysqli_num_rows($result) > 0) {
             echo        "<div class='pInfo'>";
             echo            "<p><strong>" . $listSanPhamBanChay[$i]['TenSP'] . "</strong></p>";
             echo            "<h3 class='amount'>" . $listSanPhamBanChay[$i]['Gia'] . "₫</h3>";
-            echo            "<span>" . $listSanPhamBanChay[$i]['ID'] . "</span><br>";
             echo    "<span>Màn Hình: " . $listSanPhamBanChay[$i]['ManHinh'] . "</span><br>";
             echo    "<span>HĐH: " . $listSanPhamBanChay[$i]['HDH'] . "</span><br>";
             echo    "<span>Camera Sau: " . $listSanPhamBanChay[$i]['CameraSau'] . "</span><br>";
@@ -74,7 +73,6 @@ if (mysqli_num_rows($result) > 0) {
             echo        "<div class='pInfo'>";
             echo            "<p><strong>" . $listSanPhamMoiNhat[$i]['TenSP'] . "</strong></p>";
             echo            "<h3 class='amount'>" . $listSanPhamMoiNhat[$i]['Gia'] . "₫</h3>";
-            echo            "<span>" . $listSanPhamMoiNhat[$i]['ID'] . "</span><br>";
             echo    "<span>Màn Hình: " . $listSanPhamMoiNhat[$i]['ManHinh'] . "</span><br>";
             echo    "<span>HĐH: " . $listSanPhamMoiNhat[$i]['HDH'] . "</span><br>";
             echo    "<span>Camera Sau: " . $listSanPhamMoiNhat[$i]['CameraSau'] . "</span><br>";

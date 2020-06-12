@@ -208,7 +208,7 @@ if (mysqli_num_rows($result) > 0) {
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input class="btn btn-primary" type="submit" value="Thêm" /></td>
+                    <td><input class="btn btn-primary" type="submit" value="Cập Nhật" /></td>
                 </tr>
             </table>
         </form>
