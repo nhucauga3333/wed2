@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql->close();
     $conn->close();
 
-    //header('Location: quanlysanpham.php');
+    header('Location: quanlysanpham.php');
 }
 
 

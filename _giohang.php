@@ -17,14 +17,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     //thêm dữ liệu vào hóa đơn
-    $sql =  $conn->prepare("INSERT INTO HOADON (SoHD,NgLap,TenKH,SdtKH,DiaChiGiaoHang,TongTien) VALUES (?,?,?,?,?,?)");
-    $sql->bind_param("sssssi", $SoHD, $NgLap, $TenKH, $SdtKH, $DiaChiGiaoHang, $TongTien);
+    $sql =  $conn->prepare("INSERT INTO HOADON (SoHD,NgLap,TenKH,SdtKH,DiaChiGiaoHang,TongTien,TrangThai) VALUES (?,?,?,?,?,?,?)");
+    $sql->bind_param("sssssis", $SoHD, $NgLap, $TenKH, $SdtKH, $DiaChiGiaoHang, $TongTien,$TrangThai);
     $SoHD = "HĐ" . randomNumber(7);
     $NgLap =  date('Y-m-d H:i:s');
     $TenKH = $_REQUEST['TenKH'];
     $SdtKH = $_REQUEST['SdtKH'];
     $DiaChiGiaoHang = $_REQUEST['DiaChiGiaoHang'];
     $TongTien = $tongtien;
+    $TrangThai = "mới đặt hàng";
 
     $sql->execute();
 
@@ -119,26 +120,12 @@ function randomNumber($length)
                     }
 
                     var sdt = document.forms["form"]["SdtKH"].value;
-                    if (sdt == "" || sdt > 1000000000 || sdt < 9999999999) {
+                    if (sdt == ""  ) {
                         alert("Vui Lòng Nhập SĐT");
                         return false;
                     }
 
-                    $(document).ready(function() {
-                    $('body').on('click', '.checkmobile', function() {
-                        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-                        var mobile = $('#mobile').val();
-                        if (mobile !== '') {
-                            if (vnf_regex.test(mobile) == false) {
-                                alert('Số điện thoại của bạn không đúng định dạng!');
-                            } else {
-                                alert('Số điện thoại của bạn hợp lệ!');
-                            }
-                        } else {
-                            alert('Bạn chưa điền số điện thoại!');
-                        }
-                    });
-                });
+ 
 
                     var diachi = document.forms["form"]["DiaChiGiaoHang"].value;
                     if (diachi == "") {

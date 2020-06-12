@@ -76,7 +76,7 @@ session_start();
                         <a href="introduce.php"> Giới thiệu</a>
                         <a href="giohang.php">Giỏ Hàng</a>
                         <form action="timkiemsanpham.php" method = "GET">
-                            <a href="#" onclick='alert("đang gọi vui lòng chờ để được tư vấn")' >Hotline: 1900</a>
+                        
                         <?php
                             echo    '<input type="text" value="'.$timkiemTen.'" name="TenSP"  placeholder="Tìm kiếm..">'
                         ?>

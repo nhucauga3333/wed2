@@ -3,8 +3,8 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //cập nhật trạng thái hóa đơn
-    $sql =  $conn->prepare("UPDATE HOADON SET TrangThai = ? WHERE ID = ?");  
-    $sql->bind_param("si", $TrangThai,$ID);
+    $sql =  $conn->prepare("UPDATE HOADON SET TrangThai = ? WHERE ID = ?");
+    $sql->bind_param("si", $TrangThai, $ID);
 
     $TrangThai = $_REQUEST['TrangThai'];
     $ID = $_GET['ID'];
@@ -12,10 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql->execute();
     $sql->close();
-
 }
 
-$sql = "SELECT * FROM HOADON WHERE ID = " . $_GET['ID'];
+$sql = "SELECT *, DATE(NgLap) as  NgLap FROM HOADON WHERE ID = " . $_GET['ID'];
 
 
 $result = mysqli_query($conn, $sql);
@@ -42,7 +41,7 @@ if (mysqli_num_rows($result) > 0) {
         $listctHoaDon[] = $row;
     }
 }
-$conn->close();  
+$conn->close();
 ?>
 
 <div class="card">
@@ -61,49 +60,50 @@ $conn->close();
 
         <hr>
 
-        <table style="width:100%">
-            <tr>
-                <td>Tên Sản Phẩm</td>
-                <td>Số Lượng</td>
-                <td>Đơn Giá</td>
-                <td>Thành Tiền</td>
-            </tr>
-
-            <?php
-            for ($i = 0; $i < count($listctHoaDon); $i++) {
-                $cthoadon = "window.location.href = 'cthoadon.php?ID=" . $listctHoaDon[$i]['ID'] . "'";
-                echo    '<tr>';
-                echo        '<td>' . $listctHoaDon[$i]['TenSP'] . '</td>';
-                echo        '<td>' . $listctHoaDon[$i]['SoLuong'] . '</td>';
-                echo        '<td>' . $listctHoaDon[$i]['DonGia'] . '</td>';
-                echo        '<td>' . $listctHoaDon[$i]['ThanhTien'] . '</td>';
-                echo    '</tr>';
-            }
-            ?>
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th>Tên Sản Phẩm</th>
+                    <th class="text-center">Số Lượng</th>
+                    <th  class="text-right">Đơn Giá</th>
+                    <th  class="text-right">Thành Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                for ($i = 0; $i < count($listctHoaDon); $i++) {
+                    $cthoadon = "window.location.href = 'cthoadon.php?ID=" . $listctHoaDon[$i]['ID'] . "'";
+                    echo    '<tr>';
+                    echo        '<td >' . $listctHoaDon[$i]['TenSP'] . '</td>';
+                    echo        '<td class="text-center">' . $listctHoaDon[$i]['SoLuong'] . '</td>';
+                    echo        '<td class="text-right">' . $listctHoaDon[$i]['DonGia'] . '</td>';
+                    echo        '<td class="text-right">' . $listctHoaDon[$i]['ThanhTien'] . '</td>';
+                    echo    '</tr>';
+                }
+                ?>
+            </tbody>
         </table>
 
-    
-            <form class="form-inline" action="<?php echo 'cthoadon.php?ID='. $_GET['ID'];?>" method="POST">
 
-        
-                <table>
-                    <tr>
-                        <td><label>Trạng Thái</label></td>
-                        <?php
-                            echo '<td><input type="text"  value = "' . $listctHoaDon["TrangThai"] . '" name="TrangThai"></td>'
-                        ?>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td class="pull-right">
-                            <button type="submit" style="color:black"><strong>Cập Nhật</strong></button>
-                        </td>
-                    </tr>
-                </table>
+        <form class="form-inline" action="<?php echo 'cthoadon.php?ID=' . $_GET['ID']; ?>" method="POST">
 
-                <input type="hidden" id="inhoadon" name="Giohang" />
-            </form>
-        
+
+            <table class="table table-borderless" style="margin-top:10px">
+                <tr>
+                    <td style="width:100px">Trạng Thái</td>
+                    <?php
+                    echo '<td><input class="form-control" type="text"  value = "' . $HoaDon["TrangThai"] . '" name="TrangThai"></td>'
+                    ?>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary" type="submit" style="color:black"><strong>Cập Nhật</strong></button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
 
     </div>
 </div>
