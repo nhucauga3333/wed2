@@ -39,10 +39,10 @@ $product = $listProduct[0];
         var giohang = localStorage.getItem("giohang");
 
 
-        if (giohang.length > 0) {
+        if (giohang !=null && giohang.length > 0) {
             listsanpham = JSON.parse(giohang);
         }
-
+        
         var hinhanh = document.getElementById("hinhanh").getAttribute("src");
         var tensp = document.getElementById("tensp").innerHTML;
         var gia = document.getElementById("gia").innerHTML;
